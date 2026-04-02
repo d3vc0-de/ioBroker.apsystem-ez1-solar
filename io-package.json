@@ -1,0 +1,92 @@
+{
+	"common": {
+		"name": "apsystem-ez1-solar",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"uk": "Початкова версія",
+				"zh-cn": "首次出版"
+			}
+		},
+		"titleLang": {
+			"en": "APSystem EZ1",
+			"de": "APSystem EZ1",
+			"ru": "APSystem EZ1",
+			"pt": "Sistema AP EZ1",
+			"nl": "APSysteem EZ1",
+			"fr": "Système AP EZ1",
+			"it": "Sistema AP EZ1",
+			"es": "Sistema AP EZ1",
+			"pl": "APSystem EZ1",
+			"uk": "APSystem EZ1",
+			"zh-cn": "AP系统EZ1"
+		},
+		"desc": {
+			"en": "Adapter for APSystems EZ1 Micorinverter via local API",
+			"de": "Adapter für APSystems EZ1 Micorinverter über lokale API",
+			"ru": "Адаптер для микроинвертора APSystems EZ1 через локальный API",
+			"pt": "Adaptador para Micorinverter APSystems EZ1 via API local",
+			"nl": "Adapter voor APSystems EZ1 micro-omvormer via lokale API",
+			"fr": "Adaptateur pour APSystems EZ1 Micorinverter via API locale",
+			"it": "Adattatore per Microinverter APSystems EZ1 tramite API locale",
+			"es": "Adaptador para Microinversor APSystems EZ1 vía API local",
+			"pl": "Adapter do mikroinwertera APSystems EZ1 poprzez lokalne API",
+			"uk": "Адаптер для APSystems EZ1 Micorinverter через локальний API",
+			"zh-cn": "通过本地 API 适用于 APSystems EZ1 Microinverter 的适配器"
+		},
+		"authors": [
+			"alex <d3vc0_de@proton.me>"
+		],
+		"keywords": [
+			"apsystems",
+			"ez1",
+			"solar",
+			"microinverter"
+		],
+		"licenseInformation": {
+			"type": "free",
+			"license": "MIT"
+		},
+		"platform": "Javascript/Node.js",
+		"icon": "apsystem-ez1-solar.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/d3vc0-de/ioBroker.apsystem-ez1-solar/main/admin/apsystem-ez1-solar.png",
+		"readme": "https://github.com/d3vc0-de/ioBroker.apsystem-ez1-solar/blob/main/README.md",
+		"loglevel": "info",
+		"tier": 3,
+		"mode": "daemon",
+		"type": "energy",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"adminUI": {
+			"config": "json"
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=6.0.11"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": ">=7.0.23"
+			}
+		]
+	},
+	"native": {
+		"ipAddress": "",
+		"pollInterval": 30,
+		"suppressConnectionErrors": true
+	},
+	"objects": [],
+	"instanceObjects": []
+}

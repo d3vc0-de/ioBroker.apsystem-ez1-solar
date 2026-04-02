@@ -1,0 +1,6 @@
+{
+	"apsystem-ez1-solar adapter settings": "Настройки адаптера APSystems EZ1",
+	"ipAddress": "IP-адрес устройства EZ1",
+	"pollInterval": "Интервал опроса (секунды)",
+	"suppressConnectionErrors": "Подавлять ошибки сети (напр. ночью без выработки энергии)"
+}

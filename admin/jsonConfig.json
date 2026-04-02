@@ -1,0 +1,38 @@
+{
+	"i18n": true,
+	"type": "panel",
+	"items": {
+		"ipAddress": {
+			"type": "text",
+			"label": "ipAddress",
+			"newLine": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		},
+		"pollInterval": {
+			"type": "number",
+			"label": "pollInterval",
+			"min": 5,
+			"max": 3600,
+			"newLine": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		},
+		"suppressConnectionErrors": {
+			"type": "checkbox",
+			"label": "suppressConnectionErrors",
+			"newLine": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		}
+	}
+}

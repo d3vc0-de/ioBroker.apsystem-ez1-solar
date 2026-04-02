@@ -1,0 +1,6 @@
+{
+	"apsystem-ez1-solar adapter settings": "APSystems EZ1 适配器设置",
+	"ipAddress": "EZ1 设备的 IP 地址",
+	"pollInterval": "轮询间隔（秒）",
+	"suppressConnectionErrors": "抑制网络错误（例如夜间无发电时）"
+}
