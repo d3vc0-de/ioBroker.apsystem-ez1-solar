@@ -31,7 +31,6 @@ class ApsystemEz1Solar extends utils.Adapter {
 			return;
 		}
 		this.log.info(`Connecting to EZ1 at ${this.config.ipAddress}:8050, polling every ${this.config.pollInterval}s`);
-		this.log.info(`suppressConnectionErrors = ${this.config.suppressConnectionErrors}`);
 
 		await this.createObjects();
 
@@ -179,6 +178,13 @@ class ApsystemEz1Solar extends utils.Adapter {
 			native: {},
 		});
 
+		// connection state (ioBroker standard)
+		await this.setObjectNotExistsAsync('info.connection', {
+			type: 'state',
+			common: { name: 'Connection', type: 'boolean', role: 'indicator.connected', read: true, write: false },
+			native: {},
+		});
+
 		// alarm channel
 		await this.setObjectNotExistsAsync('alarm', { type: 'channel', common: { name: 'Alarms' }, native: {} });
 		await this.setObjectNotExistsAsync('alarm.offGrid', {
@@ -228,13 +234,16 @@ class ApsystemEz1Solar extends utils.Adapter {
 			{ name: 'getAlarm', fn: () => this.fetchAlarm() },
 			{ name: 'getOnOff', fn: () => this.fetchOnOff() },
 		];
+		let connected = true;
 		for (const task of tasks) {
 			try {
 				await task.fn();
 			} catch (e) {
+				connected = false;
 				this.logConnectionError(`${task.name} failed: ${e.message}`);
 			}
 		}
+		await this.setState('info.connection', { val: connected, ack: true });
 	}
 
 	/**
@@ -262,6 +271,7 @@ class ApsystemEz1Solar extends utils.Adapter {
 			const req = http.get(url, { timeout: 5000 }, res => {
 				let raw = '';
 				res.on('data', chunk => (raw += chunk));
+				res.on('error', reject);
 				res.on('end', () => {
 					try {
 						const json = JSON.parse(raw);
@@ -353,7 +363,14 @@ class ApsystemEz1Solar extends utils.Adapter {
 			const apiStatus = state.val ? '0' : '1';
 			this.apiGet(`/setOnOff?status=${apiStatus}`)
 				.then(() => this.setState('device.status', { val: state.val, ack: true }))
-				.catch(e => this.log.error(`setOnOff failed: ${e.message}`));
+				.catch(async e => {
+					this.log.error(`setOnOff failed: ${e.message}`);
+					// revert UI to actual device state
+					const current = await this.getStateAsync('device.status');
+					if (current) {
+						await this.setState('device.status', { val: current.val, ack: true });
+					}
+				});
 		} else if (localId === 'info.maxPower') {
 			const power = Math.round(Number(state.val));
 			this.apiGet(`/setMaxPower?p=${power}`)
